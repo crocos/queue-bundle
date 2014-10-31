@@ -1,0 +1,9 @@
+services:
+    crocos_queue.worker:
+        class: Crocos\QueueBundle\Worker\Worker
+        arguments:
+            - @crocos_queue.registry
+            - @logger
+
+    crocos_queue.registry:
+        class: Crocos\QueueBundle\Queue\QueueRegistry

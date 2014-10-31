@@ -1,0 +1,18 @@
+{
+    "name": "crocos/queue-bundle",
+    "description": "This bundle provides simple message queuing",
+    "keywords": ["queue"],
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/crocos/queue-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "OGAWA Katsuhiro",
+            "email": "ogawa@crocos.co.jp"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Crocos\\QueueBundle": "" }
+    },
+    "target-dir": "Crocos/QueueBundle"
+}

@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+declare(ticks = 1);
+set_time_limit(0);
+
+require_once __DIR__.'/bootstrap.php.cache';
+require_once __DIR__.'/AppKernel.php';
+
+use Symfony\Component\Console\Input\ArgvInput;
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(array('--env', '-e'), 'dev');
+$debug = $input->hasParameterOption(array('--debug', ''));
+
+$kernel = new AppKernel($env, $debug);
+$kernel->boot();
+
+// Create a worker
+$worker = $kernel->getContainer()->get('crocos_queue.worker');
+
+$worker->registerSignalHandler();
+
+// save pid
+file_put_contents($pidfile = "/tmp/crocos-app-queue.pid", getmypid());
+
+$worker->work($interval = 200/*milliseconds*/);
+
+unlink($pidfile);
